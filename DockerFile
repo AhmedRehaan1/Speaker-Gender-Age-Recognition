@@ -1,0 +1,28 @@
+# Use the official Ubuntu image
+FROM ubuntu:22.04
+
+# Prevent user interaction during package install
+ENV DEBIAN_FRONTEND=noninteractive
+
+# Update and install system packages
+RUN apt-get update && apt-get install -y \
+    python3 \
+    python3-pip \
+    python3-dev \
+    build-essential \
+    ffmpeg \
+    libsndfile1 \
+    && apt-get clean
+
+# Ensure pip is up to date
+RUN pip3 install --upgrade pip
+
+# Install Python packages system-wide
+RUN pip3 install \
+    numpy \
+    pandas \
+    scikit-learn \
+    seaborn \
+    matplotlib \
+    librosa \
+    imbalanced-learn --break-system-packages
